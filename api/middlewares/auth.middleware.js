@@ -1,5 +1,5 @@
 const Passport = require('passport'),
-      Boom = require('boom'),
+      Boom = require('@hapi/boom'),
       User = require('../models/user.model'),
       ES6Promisify = require('es6-promisify');
 

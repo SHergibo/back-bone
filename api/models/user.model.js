@@ -2,7 +2,7 @@ const Mongoose = require('mongoose'),
       Moment = require('moment-timezone'),
       Jwt = require('jwt-simple'),
       Bcrypt = require('bcrypt'),
-      Boom = require('boom');
+      Boom = require('@hapi/boom');
 
 const {env, jwtSecret, jwtExpirationInterval} = require('../../config/environment.config');
 

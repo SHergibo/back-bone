@@ -1,5 +1,5 @@
 const TokenAuth = require('../models/token-auth.model'),
-  Boom = require('boom'),
+  Boom = require('@hapi/boom'),
   User = require('./../models/user.model'),
   Moment = require('moment-timezone')
 

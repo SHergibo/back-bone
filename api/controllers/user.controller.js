@@ -1,5 +1,5 @@
 const User = require('./../models/user.model'),
-      Boom = require('boom'),
+      Boom = require('@hapi/boom'),
       TokenAuth = require('./../models/token-auth.model');
 
 /**

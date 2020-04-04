@@ -1,6 +1,6 @@
 const Logger = require('../../config/logger.config'),
       Notifier = require('node-notifier'),
-      Boom = require('boom');
+      Boom = require('@hapi/boom');
 
 exports.log = (err, str, req) =>{
     let message = `Error in ${req.method} ${req.url} ${str} \n`;
