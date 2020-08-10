@@ -6,8 +6,6 @@ const User = require('./../models/user.model'),
 * Post one user
 */
 exports.add = async (req, res, next) =>{
-    console.log(req.body)
-    console.log("ici")
     try{
         const user = new User(req.body);
         await user.save();

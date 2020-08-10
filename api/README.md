@@ -1,4 +1,4 @@
-# Node API for TodoList project
+# Back-bone for nodeJs Api
 
 ## NPM packages installation
 

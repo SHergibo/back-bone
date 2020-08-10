@@ -18,7 +18,6 @@ const { jwtExpirationInterval } = require('./../../config/environment.config');
 */
 
 const _generateTokenResponse = function (user, accessToken) {
-  console.log(accessToken)
   const tokenType = "Bearer";
   const refreshToken = RefreshToken.generate(user);
   const expiresIn = Moment().add(jwtExpirationInterval, 'minutes');
