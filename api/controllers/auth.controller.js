@@ -113,12 +113,13 @@ exports.refresh = async (req, res, next) => {
 exports.logout = async (req, res, next) =>{
   try {
     const { email, token } = req.body;
+    if(!email || !token) return next(Boom.badRequest('An email or a token is required to logout !'));
     let response = await RefreshToken.findOneAndDelete({
       token : token,
       userEmail : email
     });
     return res.json(response);
   } catch (error) {
-    return next(error);
+    return next(Boom.badImplementation(error.message));
   }
 }
