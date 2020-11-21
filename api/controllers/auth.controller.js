@@ -65,7 +65,7 @@ exports.login = async (req, res, next) => {
       const token = _generateTokenResponse(user, accessToken);
       return res.json({ token, user: user.transform() });
     }else{
-      return res.status(403).send({error : "Please, verify your account first"});
+      return next(Boom.forbidden('Please, verify your account first'));
     }
     
   } catch (error) {
