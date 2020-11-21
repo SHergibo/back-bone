@@ -1,22 +1,50 @@
-const Winston = require('winston');
+const {createLogger, format, transports} = require('winston');
+const {combine, timestamp, json} = format;
 
-const logger = Winston.createLogger({
-    level : 'info',
-    format : Winston.format.json(),
+const { env, environments } = require('./../config/environment.config');
+
+const enumerateErrorFormat = format(info => {
+    if (info.message instanceof Error) {
+      info.message = Object.assign({
+        message: info.message.message,
+        stack: info.message.stack
+      }, info.message);
+    }
+  
+    if (info instanceof Error) {
+      return Object.assign({
+        message: info.message,
+        stack: info.stack
+      }, info);
+    }
+  
+    return info;
+  });
+
+const loggerError = createLogger({
+    format : combine(
+        enumerateErrorFormat(),
+        timestamp(),
+        json(),
+    ),
     transports : [
-        new Winston.transports.File({filename : 'logs/error.log', level : 'error'}),
-        new Winston.transports.File({filename : 'log.combined.log'})
+        new transports.File({filename : 'logs/error.log', level : 'error'}),
     ]
 });
 
-if(process.env.NODE_ENV !== "production"){
-    logger.add(new Winston.transports.Console({format : Winston.format.simple()}));
+const loggerInfo = createLogger({
+    format : combine(
+        enumerateErrorFormat(),
+        timestamp(),
+        json(),
+    ),
+    transports : [
+        new transports.File({filename : 'logs/info.log', level: 'info'})
+    ]
+});
+
+if(env.toUpperCase() !== environments.PRODUCTION){
+    loggerInfo.add(new transports.Console({format : format.simple()}));
 }
 
-logger.stream = {
-    write: (message) =>{
-        logger.info(message.trim());
-    }
-};
-
-module.exports = logger;
+module.exports = {loggerError, loggerInfo};
