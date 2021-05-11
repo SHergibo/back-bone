@@ -7,6 +7,7 @@ Mongoose.Promise = global.Promise;
 
 Mongoose.set('useFindAndModify', false);
 Mongoose.set('useCreateIndex', true);
+Mongoose.set('returnOriginal', false);
 
 Mongoose.connection.on('error', (err) =>{
     if(env.toUpperCase() === environments.PRODUCTION){
