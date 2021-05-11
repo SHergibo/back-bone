@@ -33,7 +33,7 @@ exports.findOne = async (req, res, next) =>{
 */
 exports.update = async (req, res, next) => {
     try {
-        const user = await User.findByIdAndUpdate(req.params.userId,  req.body, {override : true, upsert : true, new : true});
+        const user = await User.findByIdAndUpdate(req.params.userId,  req.body);
         return res.json(user.transform());
     } catch (error) {
         next(User.checkDuplicateEmail(err)); 
