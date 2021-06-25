@@ -42,7 +42,7 @@ exports.register = async (req, res, next) => {
     res.status(HttpStatus.CREATED);
     return res.json({ token, user: user.transform() });
   } catch (error) {
-    return next(User.checkDuplicateEmail(err));
+    next({error: error, boom: User.checkDuplicateEmail(error)});
   }
 };
 
@@ -69,7 +69,7 @@ exports.login = async (req, res, next) => {
     }
     
   } catch (error) {
-    return next(error);
+    next({error: error, boom: Boom.badImplementation(error.message)});
   }
 };
 
@@ -95,7 +95,7 @@ exports.refresh = async (req, res, next) => {
     const response = _generateTokenResponse(user, accessToken);
     return res.json(response);
   } catch (error) {
-    return next(error);
+    next({error: error, boom: Boom.badImplementation(error.message)});
   }
 };
 
@@ -120,6 +120,6 @@ exports.logout = async (req, res, next) =>{
     });
     return res.json(response);
   } catch (error) {
-    return next(Boom.badImplementation(error.message));
+    next({error: error, boom: Boom.badImplementation(error.message)});
   }
 }

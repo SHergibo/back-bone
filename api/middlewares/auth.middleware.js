@@ -14,7 +14,7 @@ const _handleJWT = (req, res, next, roles) => async(err, user, info) =>{
         if(error || !user) throw error;
         await logIn(user, {session : false});
     } catch (error) {
-        return next(Boom.unauthorized(error.message));
+        next({error: error, boom: Boom.unauthorized(error.message)});  
     }
 
     if(roles === LOGGED_USER){
