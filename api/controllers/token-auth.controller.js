@@ -4,7 +4,7 @@ const TokenAuth = require('../models/token-auth.model'),
   Moment = require('moment-timezone')
 
 /** 
-* POST token 
+* POST new email verification token  
 */
 exports.createNewToken = async (req, res, next) => {
   try {
@@ -19,7 +19,7 @@ exports.createNewToken = async (req, res, next) => {
 }
 
 /** 
-* PATCH token 
+* PATCH email verification token 
 */
 exports.updateUsedToken = async (req, res, next) => {
   try {
