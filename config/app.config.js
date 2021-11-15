@@ -7,17 +7,26 @@ const Express = require('express'),
     Router = require('./../api/routes/v1'),
     Passport = require('passport'),
     Strategies = require('./passport.config'),
-    ServiceErrorHandler = require('../api/services/error-handler.service');
+    ServiceErrorHandler = require('../api/services/error-handler.service'),
+    hbs = require('express-hbs');
 
 const { HTTPLogs, api, env, environments, CorsOrigin } = require('./environment.config');
 
 const app = Express();
 
+app.use('/assets', Express.static(`${process.cwd()}/api/public`));
+
+app.engine('hbs', hbs.express4({
+  defaultLayout : `${process.cwd()}/api/views/layouts/default-layout.hbs`
+}));
+
+app.set('views', `${process.cwd()}/api/views`);
+
+app.set('view engine', 'hbs');
+
 app.use(Helmet());
 
 app.use(Compression());
-
-app.use(Express.static('public'));
 
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
