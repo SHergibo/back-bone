@@ -5,8 +5,6 @@ const { mongo, env, environments } = require('./environment.config');
 
 Mongoose.Promise = global.Promise;
 
-Mongoose.set('useFindAndModify', false);
-Mongoose.set('useCreateIndex', true);
 Mongoose.set('returnOriginal', false);
 
 Mongoose.connection.on('error', (err) =>{
@@ -25,8 +23,6 @@ if(env.toUpperCase() === environments.DEVELOPMENT){
 exports.connect = () => {
     Mongoose.connect(mongo.uri, {
         keepAlive : 1,
-        useNewUrlParser : true,
-        useUnifiedTopology: true,
     });
     if(env.toUpperCase() === environments.PRODUCTION){
         loggerInfo.info('MongoDB server is now running on port 27017');
