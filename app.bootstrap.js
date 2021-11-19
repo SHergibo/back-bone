@@ -2,7 +2,7 @@ const {loggerInfo, loggerError} = require('./config/logger.config');
 
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
 
-if(major < 7 || major === 7 && minor <= 5){
+if(major < 16 || major === 16 && minor <= 12){
     loggerInfo.error('Node version is too low');
     process.exit(1);
 }
