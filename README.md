@@ -84,7 +84,7 @@ npm run test
 | ------ | ------------------------- | --------- | ------------------------- |
 | POST   | api/v1/auth/login         | -         | Create user access token  |
 | PATCH  | api/v1/auth/refresh-token | -         | Refresh user access token |
-| PATCH  | api/v1/auth/logout        | -         | Delete user access token  |
+| DELETE | api/v1/auth/logout        | -         | Delete user access token  |
 
 ## License
 
