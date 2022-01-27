@@ -1,6 +1,6 @@
 const app = require("../config/app.config"),
-      db = require('./db'),
-      { port } = require('../config/environment.config');
+  db = require("./db"),
+  { port } = require("../config/environment.config");
 
 module.exports.dbManagement = () => {
   beforeAll(async () => {
@@ -11,8 +11,7 @@ module.exports.dbManagement = () => {
   afterEach(async () => await db.clearDatabase());
 
   afterAll(async () => {
-
     await db.closeDatabase();
-    if(app.listening) app.close();
+    if (app.listening) app.close();
   });
 };
