@@ -36,14 +36,13 @@ const _generateTokenResponse = function (user, accessToken) {
  */
 exports.login = async (req, res, next) => {
   try {
-    const checkRole = await User.findOne({ email: req.body.email });
-    if (checkRole.role !== "ghost") {
-      const { user, accessToken } = await User.findAndGenerateToken(req.body);
-      const token = _generateTokenResponse(user, accessToken);
-      return res.json({ token, user: user.transform() });
-    } else {
-      return next(Boom.forbidden("Please, verify your account first"));
-    }
+    const checkUser = await User.findOne({ email: req.body.email });
+
+    if (!checkUser) return next(Boom.unauthorized("This email doesn't exist!"));
+
+    const { user, accessToken } = await User.findAndGenerateToken(req.body);
+    const token = _generateTokenResponse(user, accessToken);
+    return res.json({ token, user: user.transform() });
   } catch (error) {
     next({ error: error, boom: Boom.badImplementation(error.message) });
   }
@@ -63,15 +62,21 @@ exports.login = async (req, res, next) => {
 exports.refresh = async (req, res, next) => {
   try {
     const { email, refreshToken } = req.body;
+
+    const checkUser = await User.findOne({ email });
+    if (!checkUser) return next(Boom.unauthorized("This email doesn't exist!"));
+
     const refreshObject = await RefreshToken.findOneAndDelete({
       userEmail: email,
       token: refreshToken,
     });
+
     const { user, accessToken } = await User.findAndGenerateToken({
       email,
       refreshObject,
     });
     const response = _generateTokenResponse(user, accessToken);
+
     return res.json(response);
   } catch (error) {
     next({ error: error, boom: Boom.badImplementation(error.message) });
@@ -96,11 +101,11 @@ exports.logout = async (req, res, next) => {
       return next(
         Boom.badRequest("An email or a token is required to logout !")
       );
-    let response = await RefreshToken.findOneAndDelete({
+    await RefreshToken.findOneAndDelete({
       token: token,
       userEmail: email,
     });
-    return res.json(response);
+    return res.status(204).send();
   } catch (error) {
     next({ error: error, boom: Boom.badImplementation(error.message) });
   }
