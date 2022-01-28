@@ -10,6 +10,7 @@ This is a simple REST API boilerplate developed using Node.js, Express and Mongo
 - Load environment variables from .env files with [dotenv](https://github.com/rolodato/dotenv-safe)
 - Gzip compression with [compression](https://github.com/expressjs/compression)
 - Sanitize inputs against query selector injection attacks with [mongo-sanitize](https://github.com/vkarpov15/mongo-sanitize)
+- Uses [isomorphic-dompurify](https://www.npmjs.com/package/isomorphic-dompurify) to clean all incoming data before storing them in the database
 - Tests with [Jest](https://jestjs.io/)
 - Logging with [morgan](https://github.com/expressjs/morgan)
 - Authentication and Authorization with [passport](http://passportjs.org)
