@@ -72,20 +72,20 @@ npm run test
 
 ### Users
 
-| Method | URI                  | Securized | Result                                |
-| ------ | -------------------- | --------- | ------------------------------------- |
-| POST   | api/v1/users         | -         | Create new user                       |
-| GET    | api/v1/users/:userId | Logged    | Get user informations                 |
-| PATCH  | api/v1/users/:userId | Logged    | Update some fields of a user document |
-| DELETE | api/v1/users/:userId | Logged    | Delete a user                         |
+| Method | URI                  | Securized | Result                  |
+| ------ | -------------------- | --------- | ----------------------- |
+| POST   | api/v1/users         | -         | Create new user         |
+| GET    | api/v1/users/:userId | Logged    | Get user's informations |
+| PATCH  | api/v1/users/:userId | Logged    | Update user's document  |
+| DELETE | api/v1/users/:userId | Logged    | Delete a user           |
 
 ### Auth
 
-| Method | URI                       | Securized | Result                    |
-| ------ | ------------------------- | --------- | ------------------------- |
-| POST   | api/v1/auth/login         | -         | Create user access token  |
-| PATCH  | api/v1/auth/refresh-token | -         | Refresh user access token |
-| DELETE | api/v1/auth/logout        | -         | Delete user access token  |
+| Method | URI                       | Securized | Result                      |
+| ------ | ------------------------- | --------- | --------------------------- |
+| POST   | api/v1/auth/login         | -         | Create user's access token  |
+| PATCH  | api/v1/auth/refresh-token | -         | Refresh user's access token |
+| DELETE | api/v1/auth/logout        | -         | Delete user's access token  |
 
 ## License
 
