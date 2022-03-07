@@ -34,7 +34,7 @@ rm -rf .git
 
 Rename `development-sample.env`, `production-sample.env` and `test-sample.env` to `development.env`, `production.env` and `test.env`.
 
-In these files, you need to add your `JWT_SECRET`, you can alse change your DB name in `MONGO_URI`, for example `mongodb://localhost:27017/my-rest-api`.
+In these files, you need to add your `JWT_SECRET`, you can also change your DB name in `MONGO_URI`, for example `mongodb://localhost:27017/my-rest-api`.
 
 In `production.env`, you can add one or multiple urls in `CORS_ORIGIN` for security reasons. Only those urls will have access to the REST API.
 
